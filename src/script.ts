@@ -7,12 +7,14 @@ weatherForm?.addEventListener('submit', (event: SubmitEvent) => {
     const location = document.querySelector('input')?.value
     fetch(`/weather?location=${location}`).then((response) => {
         response.json().then((data) => {
+            console.log(data)
             if(data.error && messageOne && messageTwo) {
                 messageOne.textContent = data.error
                 messageTwo.textContent = ""
             } else {
-                if(messageTwo) {
-                    messageTwo.textContent = `Location: ${data.location} Forecast: ${data.forecast}`
+                if(messageOne && messageTwo) {
+                    messageOne.textContent = `${data.location}, ${data.country}`
+                    messageTwo.textContent = `It is currently ${data.forecast}, with a current temperature of ${data.temperature} (but it feels like ${data.temperatureFeelsLike}). Current wind speed is ${data.windSpeed}`
                 }
             }
             console.log(data)

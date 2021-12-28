@@ -17,28 +17,28 @@ app.set('view engine', 'hbs')
 
 hbs.registerPartials(`${path.resolve()}/templates/partials`)
 
-app.get('', (req: express.Request, res: any) =>{
+app.get('', (req: express.Request, res: any) => {
     res.render('index', {
         title: "Weather App",
         name: "Sam W."
     })
 })
 
-app.get('/about', (req: express.Request, res: any) =>{
+app.get('/about', (req: express.Request, res: any) => {
     res.render('about', {
         title: "About Me",
         name: "Sam W."
     })
 })
 
-app.get('/help', (req: express.Request, res: any) =>{
+app.get('/help', (req: express.Request, res: any) => {
     res.render('help', {
         title: "Help",
         name: "Sam W."
     })
 })
 
-app.get('/help/*', (req: express.Request, res: any) =>{
+app.get('/help/*', (req: express.Request, res: any) => {
     res.render("error", {
         title: "Help",
         name: "Sam W.",
@@ -46,9 +46,9 @@ app.get('/help/*', (req: express.Request, res: any) =>{
     });
 })
 
-app.get('/weather', (req: express.Request, res: any) =>{
+app.get('/weather', (req: express.Request, res: any) => {
     const location = req?.query?.location
-    if(!location) { 
+    if (!location) {
         return res.send({
             error: "Must provide location"
         })
@@ -74,33 +74,33 @@ app.get('/weather', (req: express.Request, res: any) =>{
             }
             else {
                 res.send({
-                    location: location,
+                    location: response?.location,
+                    country: response?.country,
                     forecast: response?.weatherConditions,
                     temperature: response?.temperature,
                     temperatureFeelsLike: response?.temperatureFeelsLike,
-                    chanceOfPrecipitation: response?.chanceOfPrecipitation
-
+                    chanceOfPrecipitation: response?.chanceOfPrecipitation,
+                    windSpeed: response?.windSpeed
                 })
             }
         })
-
     })
 })
 
-app.get('/products', (req: express.Request, res: any) =>{
-    if(!req.query.search) { 
+app.get('/products', (req: express.Request, res: any) => {
+    if (!req.query.search) {
         return res.send({
             error: "Search term must be provided"
-        })    
+        })
     }
-    console.log(req.query.search)  
+    console.log(req.query.search)
 
     res.send({
         products: []
     })
 })
 
-app.get('*', (req: express.Request, res: any) =>{
+app.get('*', (req: express.Request, res: any) => {
     res.render("error", {
         title: "404",
         name: "Sam W.",

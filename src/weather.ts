@@ -7,13 +7,11 @@ const getWeather = (lat:number, lng:number, callback: (error:any, response:Weath
     request({url: url}, (error, response) => {
         const data = JSON.parse(response.body);
         if(error) {
-            console.log(error)
             callback("Failed to retrieve data from weather service", undefined)
         } else if(data.success === false) {
-            console.log(data)
             callback("Failed to retrieve data from weather service", undefined)
         } else {
-            const weather = new WeatherResponse(data.current.weather_descriptions[0], data.current.temperature, data.current.feelslike, data.current.precip)
+            const weather = new WeatherResponse(data.current.weather_descriptions[0], data.current.temperature, data.current.feelslike, data.current.precip, data.current.wind_speed, data.location.name, data.location.country)
             callback(undefined, weather)
         }
     })
