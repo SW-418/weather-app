@@ -6,9 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && npm run copy-files && node ./dist/app.js",
-    "copy-files": "cp -r ./public/ ./dist/",
-    "clean": "rmdir -r /dist"
+    "start": "node ./dist/app.js",
+    "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src",
+    "start-local": "tsc && npm run copy-files && node ./dist/app.js",
+    "copy-files": "cp -r ./public/ ./dist/"
   },
   "author": "",
   "license": "ISC",
