@@ -8,6 +8,7 @@ import { getWeather } from "./weather.js";
 import { WeatherResponse } from "./models/weather-response.js";
 
 const app = express()
+const port = process.env.PORT || 3000
 
 app.use(express.static(`${path.resolve()}/dist`))
 
@@ -107,6 +108,6 @@ app.get('*', (req: express.Request, res: any) =>{
     });
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server started on port 3000")
 })

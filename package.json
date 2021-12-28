@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run copy-files && tsc && node ./dist/app.js",
+    "start": "tsc && npm run copy-files && node ./dist/app.js",
     "copy-files": "cp -r ./public/ ./dist/",
     "clean": "rmdir -r /dist"
   },
